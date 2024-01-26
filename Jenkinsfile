@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout source code from version control (e.g., Git)
-                //checkout scm
+                //git checkout scm
             }
         }
         
@@ -30,9 +30,9 @@ pipeline {
             }
         }
         
-        stage('Deploy to f1') {
+        stage('Deploy to dev') {
             when {
-                branch 'f1'
+                branch 'dev'
             }
             steps {
                 // Deploy to the development environment
@@ -40,15 +40,26 @@ pipeline {
             }
         }
         
-        stage('Deploy to f2') {
+        stage('Deploy to feature1') {
             when {
-                branch 'f2'
+                branch 'feature1'
             }
             steps {
                 // Deploy to the QA environment
                 //sh 'kubectl apply -f qa-deployment.yaml'
             }
         }
+
+	stage('Deploy to feature2') {
+            when {
+                branch 'feature2'
+            }
+            steps {
+                // Deploy to the QA environment
+                //sh 'kubectl apply -f qa-deployment.yaml'
+            }
+        }
+
         
         stage('Deploy to Production') {
             when {
